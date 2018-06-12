@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { createMaterialTopTabNavigator } from 'react-navigation';
 import Decks from './Decks';
+import DeckForm from './DeckForm';
 
 const NewDeck = () => (
     <View>
@@ -13,7 +14,7 @@ const Tabs = createMaterialTopTabNavigator({
         screen: Decks
     },
     NewDeck: {
-        screen: NewDeck
+        screen: DeckForm
     },
 });
 export default class App extends React.Component {
