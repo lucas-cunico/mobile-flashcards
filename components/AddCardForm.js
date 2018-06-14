@@ -1,21 +1,36 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native';
+import {timeToString} from '../utils/helpers';
+import * as api from '../utils/api';
 
-export default class DeckForm extends React.Component {
+export default class AddCardForm extends React.Component {
     state = {
-        text: ''
+        question: '',
+        answer: ''
     };
+
+    handlerSubmit(){
+        const key = timeToString();
+        const entry = this.state;
+        api.submitEntry({key, entry}).then(() => {
+
+        })
+    }
 
     render() {
         return (
             <KeyboardAvoidingView  behavior="padding" style={styles.container}>
-                <Text style={styles.textPrimary}>What is the title of your new deck?</Text>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={(text) => this.setState({text})}
                     value={this.state.text}
                 />
-                <TouchableOpacity style={styles.btn} onPress={() => alert('pei!')}>
+                <TextInput
+                    style={styles.textInput}
+                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.text}
+                />
+                <TouchableOpacity style={styles.btn} onPress={this.handlerSubmit}>
                     <Text style={styles.bntColor}>Submit</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>

@@ -1,27 +1,41 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { createMaterialTopTabNavigator } from 'react-navigation';
-import Decks from './Decks';
-import DeckForm from './DeckForm';
+import {createMaterialTopTabNavigator, createStackNavigator} from 'react-navigation';
+import Decks from './components/Decks';
+import DeckForm from './components/DeckForm';
+import AddCardForm from './components/AddCardForm';
 
-const NewDeck = () => (
-    <View>
-        <Text>NewDeck!</Text>
-    </View>
-);
 const Tabs = createMaterialTopTabNavigator({
     Deck: {
         screen: Decks
     },
     NewDeck: {
-        screen: DeckForm
+        screen: DeckForm,
+        navigationOptions: {
+            tabBarLabel: 'New Deck',
+        },
     },
 });
+
+const MainNavigator = createStackNavigator({
+    Home: {
+        screen: Tabs,
+    },
+    DeckForm: {
+        screen: DeckForm
+    },
+    AddCardForm: {
+        screen: AddCardForm,
+        navigationOptions: {
+            tabBarLabel: 'Add Card',
+        },
+    }
+});
+
 export default class App extends React.Component {
 
-  render() {
-    return (
-      <Tabs/>
-    );
-  }
+    render() {
+        return (
+            <MainNavigator/>
+        );
+    }
 }

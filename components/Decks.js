@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import Deck from './Deck'
 
 export default class Decks extends React.Component {
@@ -28,12 +28,6 @@ export default class Decks extends React.Component {
         }]
     };
 
-    renderItem = ({item}) => {
-        return <View >
-            <Text>{item.title}</Text>
-            <Text>{item.count} cards</Text>
-        </View>
-    };
   render() {
     return (
         <View style={styles.container}>
