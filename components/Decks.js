@@ -1,50 +1,48 @@
 import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import Deck from './Deck'
+import * as actions from '../actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as api from '../utils/api';
 
-export default class Decks extends React.Component {
+class Decks extends React.Component {
 
-    state = {
-        list: [{
-            title: 'item 1',
-            count: 2,
-            key : '0'
-        },{
-            title: 'item 2',
-            count: 2,
-            key : '1'
-        },{
-            title: 'item 3',
-            count: 5,
-            key :'2'
-        },{
-            title: 'item 4',
-            count: 1,
-            key : '3'
-        },{
-            title: 'item 5',
-            count: 0,
-            key : '4'
-        }]
-    };
+    componentDidMount() {
+        // api.clear();
+        this.props.actions.findAll();
+    }
 
-  render() {
-    return (
-        <View style={styles.container}>
-            <FlatList
-                data={this.state.list}
-                renderItem={(item) => <Deck {...item}/>}
-            />
-        </View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.container}>
+                <FlatList
+                    data={this.props.data ? Object.values(this.props.data) : []}
+                    renderItem={(item) => <Deck {...item}/>}
+                />
+            </View>
+        );
+    }
+}
+function mapState(state) {
+    const {data} = state;
+    return {
+        data
+    }
 }
 
+function mapDispatch (dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    }
+}
+export default connect(mapState, mapDispatch)(Decks);
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

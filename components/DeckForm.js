@@ -1,16 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native';
-import * as api from '../utils/api';
+import * as actions from '../actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-export default class DeckForm extends React.Component {
+class DeckForm extends React.Component {
     state = {
         title: ''
     };
 
     handlerSubmit() {
-        const entry = this.state;
-        const {title} = entry;
-        api.submitEntry({title, entry}).then(() => {
+        const {title} = this.state;
+        this.props.actions.saveDeck({title}).then(() => {
             this.props.navigation.navigate(
                 'AddCardForm',
                 {entryId: title}
@@ -34,6 +35,14 @@ export default class DeckForm extends React.Component {
         );
     }
 }
+
+
+function mapDispatch (dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    }
+}
+export default connect(null, mapDispatch)(DeckForm);
 
 const styles = StyleSheet.create({
     container: {

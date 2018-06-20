@@ -1,42 +1,60 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, TextInput, KeyboardAvoidingView} from 'react-native';
-import {timeToString} from '../utils/helpers';
-import * as api from '../utils/api';
+import * as actions from '../actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-export default class AddCardForm extends React.Component {
+class AddCardForm extends React.Component {
     state = {
         question: '',
         answer: ''
     };
 
     handlerSubmit(){
-        const key = timeToString();
-        const entry = this.state;
-        api.submitEntry({key, entry}).then(() => {
-
+        const {question, answer} = this.state;
+        const {entryId} = this.props;
+        alert(entryId);
+        this.props.actions.saveCard(entryId, {question, answer}).then(() => {
+            alert('success');
         })
     }
 
     render() {
         return (
             <KeyboardAvoidingView  behavior="padding" style={styles.container}>
+                <Text>Question</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}
+                    onChangeText={(question) => this.setState({question})}
+                    value={this.state.question}
                 />
+                <Text>Answer</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={(text) => this.setState({text})}
-                    value={this.state.text}
+                    onChangeText={(answer) => this.setState({answer})}
+                    value={this.state.answer}
                 />
-                <TouchableOpacity style={styles.btn} onPress={this.handlerSubmit}>
+                <TouchableOpacity style={styles.btn} onPress={this.handlerSubmit.bind(this)}>
                     <Text style={styles.bntColor}>Submit</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         );
     }
 }
+
+function mapStateToProps (state, { navigation }) {
+    const { entryId } = navigation.state.params
+
+    return {
+        entryId,
+    }
+}
+function mapDispatch (dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    }
+}
+export default connect(mapStateToProps, mapDispatch)(AddCardForm);
 
 const styles = StyleSheet.create({
     container: {

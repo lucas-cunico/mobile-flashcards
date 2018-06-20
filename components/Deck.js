@@ -8,7 +8,7 @@ export default class Deck extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.textPrimary}>{item.title}</Text>
-                <Text style={styles.textSecondary}>{item.count} cards</Text>
+                <Text style={styles.textSecondary}>{item.questions ? item.questions.length : 0} cards</Text>
             </View>
         );
     }

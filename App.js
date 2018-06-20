@@ -3,6 +3,10 @@ import {createMaterialTopTabNavigator, createStackNavigator} from 'react-navigat
 import Decks from './components/Decks';
 import DeckForm from './components/DeckForm';
 import AddCardForm from './components/AddCardForm';
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './reducers'
+import thunk from 'redux-thunk'
 
 const Tabs = createMaterialTopTabNavigator({
     Deck: {
@@ -26,16 +30,28 @@ const MainNavigator = createStackNavigator({
     AddCardForm: {
         screen: AddCardForm,
         navigationOptions: {
-            tabBarLabel: 'Add Card',
+            title: 'Add Card',
+            headerStyle: {
+                backgroundColor: '#000',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
         },
     }
 });
-
+const store = createStore(
+    reducer,
+    applyMiddleware(thunk)
+);
 export default class App extends React.Component {
 
     render() {
         return (
-            <MainNavigator/>
+            <Provider store={store}>
+                <MainNavigator/>
+            </Provider>
         );
     }
 }
