@@ -2,6 +2,7 @@ import React from 'react';
 import {createMaterialTopTabNavigator, createStackNavigator} from 'react-navigation';
 import Decks from './components/Decks';
 import DeckForm from './components/DeckForm';
+import Deck from './components/Deck';
 import AddCardForm from './components/AddCardForm';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
@@ -18,14 +19,32 @@ const Tabs = createMaterialTopTabNavigator({
             tabBarLabel: 'New Deck',
         },
     },
+}, {
+    navigationOptions: {
+        header: null
+    },
+    tabBarOptions: {
+        activeTintColor: '#fff',
+        style: {
+            height: 56,
+            backgroundColor: '#000',
+            shadowColor: 'rgba(0, 0, 0, 0.24)',
+            shadowOffset: {
+                width: 0,
+                height: 3
+            },
+            shadowRadius: 6,
+            shadowOpacity: 1
+        }
+    }
 });
 
 const MainNavigator = createStackNavigator({
     Home: {
         screen: Tabs,
-    },
-    DeckForm: {
-        screen: DeckForm
+        navigationOptions:{
+            header: null
+        }
     },
     AddCardForm: {
         screen: AddCardForm,

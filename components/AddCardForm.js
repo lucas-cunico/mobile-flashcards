@@ -13,8 +13,11 @@ class AddCardForm extends React.Component {
     handlerSubmit(){
         const {question, answer} = this.state;
         const {entryId} = this.props;
-        alert(entryId);
         this.props.actions.saveCard(entryId, {question, answer}).then(() => {
+            this.setState({
+                question: '',
+                answer: ''
+            });
             alert('success');
         })
     }

@@ -18,7 +18,7 @@ export function saveCard(title, question) {
                 }
                 data[title].questions.push(question);
             }
-            // AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+            AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
         })
 }
 

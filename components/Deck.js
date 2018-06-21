@@ -1,15 +1,26 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 export default class Deck extends React.Component {
+
+    handlerSubmit(){
+        let {title} = this.props.item;
+        alert(JSON.stringify(this.props.navigation))
+        // this.props.navigation.navigate(
+        //     'AddCardForm',
+        //     {entryId: title}
+        // )
+    }
 
     render() {
         const {item} = this.props;
         return (
+            <TouchableOpacity onPress={this.handlerSubmit.bind(this)}>
             <View style={styles.container}>
                 <Text style={styles.textPrimary}>{item.title}</Text>
                 <Text style={styles.textSecondary}>{item.questions ? item.questions.length : 0} cards</Text>
             </View>
+            </TouchableOpacity>
         );
     }
 }

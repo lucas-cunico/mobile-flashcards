@@ -16,12 +16,16 @@ export default (state = {data: {}}, action) => {
                 ...state, ...{data}
             };
         case SAVE_CARD :
-            //TODO
+            let dataState = state.data;
             let {card} = action;
             let titleFromAction = action.title;
-            return {
-                ...state
-            };
+            if(dataState[titleFromAction]){
+                if(!dataState[titleFromAction].questions){
+                    dataState[titleFromAction].questions = []
+                }
+                dataState[titleFromAction].questions.push(card);
+            }
+            return {...state, ...{data: dataState}};
         default :
             return state
     }
