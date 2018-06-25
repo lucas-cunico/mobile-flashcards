@@ -7,18 +7,31 @@ import { connect } from 'react-redux';
 import * as api from '../utils/api';
 
 class Decks extends React.Component {
+    state = {
+        refreshing: false,
+    };
 
+    _onRefresh() {
+        this.setState({refreshing: true});
+        this.props.actions.findAll().then(() => {
+            this.setState({refreshing: false});
+        });
+    }
     componentDidMount() {
         // api.clear();
         this.props.actions.findAll();
     }
+
 
     render() {
         return (
             <View style={styles.container}>
                 <FlatList
                     data={this.props.data ? Object.values(this.props.data) : []}
-                    renderItem={(item) => <Deck {...item}/>}
+                    keyExtractor={(item, index) => index+''}
+                    refreshing={this.state.refreshing}
+                    onRefresh={this._onRefresh.bind(this)}
+                    renderItem={(item) => <Deck {...item} navigation={this.props.navigation}/>}
                 />
             </View>
         );
