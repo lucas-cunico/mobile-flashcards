@@ -33,9 +33,11 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     textSecondary: {
-        color: '#6c757d'
+        color: '#6c757d',
+        textAlign: 'center'
     },
     textPrimary: {
-        fontSize: 19
+        fontSize: 19,
+        textAlign: 'center'
     }
 });
