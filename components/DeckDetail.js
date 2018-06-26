@@ -8,7 +8,7 @@ class DeckDetail extends React.Component {
 
     handlerStartQuiz(){
         let {deck} = this.props;
-        if(deck.questions.length > 0){
+        if(deck.questions && deck.questions.length > 0){
             this.props.navigation.navigate(
                 'Quiz',
                 {deck}

@@ -46,7 +46,6 @@ export function setLocalNotification () {
                                     repeat: 'day',
                                 }
                             );
-
                             AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
                         }
                     })
