@@ -14,12 +14,12 @@ class AddCardForm extends React.Component {
         const {question, answer} = this.state;
         const {entryId} = this.props;
         this.props.actions.saveCard(entryId, {question, answer}).then(() => {
+            alert('success');
             this.setState({
                 question: '',
                 answer: ''
             });
-            alert('success');
-        })
+        }).catch(e => alert(e))
     }
 
     render() {

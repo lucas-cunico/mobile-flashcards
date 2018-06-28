@@ -13,8 +13,14 @@ class DeckForm extends React.Component {
         const {title} = this.state;
         this.props.actions.saveDeck({title}).then(() => {
             this.props.navigation.navigate(
-                'AddCardForm',
-                {entryId: title}
+                'DeckDetail',
+                {
+                    deck: {
+                        title,
+                        questions: []
+                    },
+                    title
+                }
             )
         })
     }

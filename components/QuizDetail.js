@@ -7,14 +7,16 @@ class Quiz extends React.Component {
     handlerRestart() {
         const {deck} = this.props;
         this.props.navigation.navigate(
-            'DeckDetail',
+            'Quiz',
             {deck}
         );
     }
 
     handlerBackToDeck(){
+        const {deck} = this.props;
         this.props.navigation.navigate(
-            'Home'
+            'DeckDetail',
+            {deck}
         );
     }
 
@@ -27,7 +29,7 @@ class Quiz extends React.Component {
                     <Text >Rate:</Text>
                     <Text style={styles.textPrimary}>{`${percent}%`}</Text>
                     <TouchableOpacity style={styles.btnFirst} onPress={this.handlerRestart.bind(this)}>
-                        <Text style={styles.bntColorFirst}>Restart Quis</Text>
+                        <Text style={styles.bntColorFirst}>Restart Quiz</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={this.handlerBackToDeck.bind(this)}>
                         <Text style={styles.bntColor}>Back to Deck</Text>

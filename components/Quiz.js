@@ -20,6 +20,7 @@ class Quiz extends React.Component {
         const {deck} = this.props;
         if(this.state.progress+1 === deck.questions.length){
             clearLocalNotification().then(setLocalNotification).then(() => {
+                this.setState({userAnswer: [], progress: 0})
                 this.props.navigation.navigate(
                     'QuizDetail',
                     {userAnswer, deck}

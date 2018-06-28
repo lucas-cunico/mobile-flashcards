@@ -2,10 +2,8 @@ import {AsyncStorage} from 'react-native'
 const STORAGE_KEY = 'STORAGE_KEY';
 
 export function saveDeck(deck) {
-    let obj = {};
     const {title} = deck;
-    obj[title] = deck;
-    return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(obj))
+    return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({[title]: {title}}))
 }
 
 export function saveCard(title, question) {

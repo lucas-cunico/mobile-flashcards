@@ -47,7 +47,7 @@ class DeckDetail extends React.Component {
 }
 
 function mapStateToProps (state, { navigation }) {
-    const { deck } = navigation.state.params
+    const { deck } = navigation.state.params;
 
     return {
         deck,

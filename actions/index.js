@@ -11,7 +11,6 @@ export function findAll () {
             data
         })
     }
-
 }
 
 export function saveDeck (deck) {
